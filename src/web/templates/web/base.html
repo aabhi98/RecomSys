@@ -20,14 +20,14 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to bottom, #222, #444);
+            background: linear-gradient(to bottom, #000000, #434343);
             color: #fff;
             margin: 0;
             padding: 0;
         }
         .navbar {
-            background-color: #222;
-            border-bottom: 1px solid #444;
+            background-color: #000000;
+            border-bottom: 1px solid #434343;
         }
         .navbar-brand {
             color: #fff !important;
@@ -44,12 +44,14 @@
             border-color: #fff;
         }
         .thumbnail {
-            padding: 1rem;
+            padding: 0;
             margin: 1rem;
-            background-color: #111;
+            background-color: #000;
             border-radius: 0.5rem;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         .thumbnail:hover {
             transform: translateY(-5px);
@@ -57,6 +59,40 @@
         .thumbnail img {
             width: 100%;
             border-radius: 0.5rem;
+            transition: opacity 0.3s ease;
+        }
+        .thumbnail:hover img {
+            opacity: 0.7;
+        }
+        .thumbnail .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.9) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .thumbnail:hover .overlay {
+            opacity: 1;
+        }
+        .thumbnail .details {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .thumbnail .details h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        .thumbnail .details .rating {
+            color: #f5c518;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
         }
         .btn-sm {
             font-size: 14px;
@@ -101,48 +137,45 @@
 <!-- Content -->
 <div class="container">
     {% block body %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="thumbnail">
+                <img src="https://via.placeholder.com/150" alt="Movie Image">
+                <div class="overlay"></div>
+                <div class="details">
+                    <h3>Movie Title</h3>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <a href="#" class="btn btn-sm btn-primary">Watch Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="thumbnail">
+                <img src="https://via.placeholder.com/150" alt="Movie Image">
+                <div class="overlay"></div>
+                <div class="details">
+                    <h3>Movie Title</h3>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <a href="#" class="btn btn-sm btn-primary">Watch Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endblock %}
 </div>
 
 <!-- Bootstrap JS, Popper.js, and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<!-- Your custom scripts -->
-<script type="text/javascript" src="{% static 'web/js/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'web/js/bootstrap.min.js' %}"></script>
-<script>
-    $(document).ready(function() {
-        var $star_rating = $('.star-rating .fa');
-
-        var SetRatingStar = function() {
-            return $star_rating.each(function() {
-                if (parseInt($star_rating.siblings('input.rating-value').val()) >= parseInt($(this).data('rating'))) {
-                    $(this).removeClass('fa-star-o').addClass('fa-star');
-                } else {
-                    $(this).removeClass('fa-star').addClass('fa-star-o');
-                }
-            });
-        };
-
-        $star_rating.on('click', function() {
-            $star_rating.siblings('input.rating-value').val($(this).data('rating'));
-            SetRatingStar();
-        });
-
-        SetRatingStar();
-    });
-</script>
-<script>
-    function validateForm() {
-        var x = document.forms["ratingForm"]["rating"].value;
-        if (x == "0") {
-            alert("Invalid Input");
-            return false;
-        }
-    }
-</script>
-
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper
